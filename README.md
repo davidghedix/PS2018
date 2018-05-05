@@ -6,7 +6,7 @@
 This is a simple project to show the capabilities of Node-RED.
 Goal of the project is to switch on or off a led remotely, from a smartphone or a laptop.
 To accomplish this, two devices will be used: a NodeMCU and a Raspberry. 
-NodeMCU acts as an MQTT client: it subscribes to topic «home/switchLed» and publishes to topic «home/ledStatus»
+NodeMCU acts as an MQTT client: it subscribes to topic «home/switchLed» and publishes to topic «home/ledStatus».
 Raspberry Pi  is both an MQTT client and MQTT broker. NodeRED will provide:
   - A graphical interface to switch the led on and off
   - A log file that will be updated each time that the led is turned on or off
