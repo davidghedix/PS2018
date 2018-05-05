@@ -3,9 +3,9 @@
 
 // Update these with values suitable for your network.
 
-const char* ssid = "FASTWEB-PHM2YB";
-const char* password = "W61JMF9PDV";
-const char* mqtt_server = "192.168.1.142";
+const char* ssid = "xxx";
+const char* password = "yyy";
+const char* mqtt_server = "zzz";
 
 WiFiClient espClient;
 PubSubClient client(espClient);
