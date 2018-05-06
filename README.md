@@ -20,3 +20,5 @@ Note: if you want to switch on or off the led from an external network, you need
   - Set up a Network (and/or Port) Address Translation (NAT/PAT) entry that links requests from any address on port 1880, to 192.168.1.2       on port 1880.
   
 Of course, security issues must be taken into account before doing this procedure.
+
+Link to presentation slides: https://www.slideshare.net/DavidGhedalia/nodered-96151736
