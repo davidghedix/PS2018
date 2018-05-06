@@ -1,0 +1,298 @@
+[
+    {
+        "id": "9656cc47.7cb08",
+        "type": "tab",
+        "label": "Flow 2",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "e9fdc0b7.ef70b",
+        "type": "mosca in",
+        "z": "9656cc47.7cb08",
+        "mqtt_port": 1883,
+        "mqtt_ws_port": 8080,
+        "name": "",
+        "username": "admin",
+        "password": "stupidamosca",
+        "dburl": "",
+        "x": 370,
+        "y": 200,
+        "wires": [
+            [
+                "5f2f9759.445c78"
+            ]
+        ]
+    },
+    {
+        "id": "5f2f9759.445c78",
+        "type": "debug",
+        "z": "9656cc47.7cb08",
+        "name": "broker console",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 630,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "e442263e.a9e908",
+        "type": "mqtt in",
+        "z": "9656cc47.7cb08",
+        "name": "",
+        "topic": "home/ledStatus",
+        "qos": "2",
+        "broker": "71935d19.9047c4",
+        "x": 360,
+        "y": 300,
+        "wires": [
+            [
+                "c37c0bd4.1b3f08",
+                "d8fee9bc.1d3da8",
+                "899931d4.548e7"
+            ]
+        ]
+    },
+    {
+        "id": "c37c0bd4.1b3f08",
+        "type": "debug",
+        "z": "9656cc47.7cb08",
+        "name": "subscriber console",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 630,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "9d05c4b3.b83bd8",
+        "type": "mqtt out",
+        "z": "9656cc47.7cb08",
+        "name": "",
+        "topic": "home/switchLed",
+        "qos": "2",
+        "retain": "",
+        "broker": "71935d19.9047c4",
+        "x": 580,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "c96bf422.7eea28",
+        "type": "ui_text",
+        "z": "9656cc47.7cb08",
+        "group": "18a4256.3266edb",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "name": "Display status",
+        "label": "Led status",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "x": 820,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "7ccebd67.e42a54",
+        "type": "inject",
+        "z": "9656cc47.7cb08",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 360,
+        "y": 580,
+        "wires": [
+            [
+                "9d05c4b3.b83bd8"
+            ]
+        ]
+    },
+    {
+        "id": "188ec1c.90e5f3e",
+        "type": "ui_switch",
+        "z": "9656cc47.7cb08",
+        "name": "",
+        "label": "Switch led",
+        "group": "18a4256.3266edb",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "",
+        "style": "",
+        "onvalue": "1",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "0",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "x": 290,
+        "y": 460,
+        "wires": [
+            [
+                "9d05c4b3.b83bd8"
+            ]
+        ]
+    },
+    {
+        "id": "d8fee9bc.1d3da8",
+        "type": "change",
+        "z": "9656cc47.7cb08",
+        "name": "",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "0",
+                "fromt": "str",
+                "to": "Off",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "1",
+                "fromt": "str",
+                "to": "On",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 580,
+        "y": 340,
+        "wires": [
+            [
+                "c96bf422.7eea28",
+                "3e2af424.62f0ec"
+            ]
+        ]
+    },
+    {
+        "id": "1917ad0b.54c343",
+        "type": "file",
+        "z": "9656cc47.7cb08",
+        "name": "Update log",
+        "filename": "C:\\Users\\David\\Desktop\\log.txt",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "false",
+        "x": 1150,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "3e2af424.62f0ec",
+        "type": "function",
+        "z": "9656cc47.7cb08",
+        "name": "Add date and time",
+        "func": "var today = new Date();\nvar dd = today.getDate();\nvar mm = today.getMonth()+1; //January is 0!\nvar yyyy = today.getFullYear();\n\nvar hh = today.getHours();\nvar min = today.getMinutes();\nvar ss = today.getSeconds();\n\nif(dd<10) {\n    dd = '0'+dd\n} \nif(mm<10) {\n    mm = '0'+mm\n} \nif(hh<10) {\n    hh = '0'+hh\n} \nif(min<10) {\n    min = '0'+min\n} \nif(ss<10) {\n    ss = '0'+ss\n} \n\n\ntoday = dd + '/' + mm + '/' + yyyy + \" \" + hh + \":\" + min + \".\" + ss;\n\nif (msg.payload === \"On\") msg.payload += \" \";\n\nmsg.payload = msg.payload + \" \" +  today\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 860,
+        "y": 440,
+        "wires": [
+            [
+                "1917ad0b.54c343"
+            ]
+        ]
+    },
+    {
+        "id": "899931d4.548e7",
+        "type": "ui_chart",
+        "z": "9656cc47.7cb08",
+        "name": "",
+        "group": "18a4256.3266edb",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "label": "Chart",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": true,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "useOldStyle": false,
+        "x": 870,
+        "y": 300,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "71935d19.9047c4",
+        "type": "mqtt-broker",
+        "z": "",
+        "name": "",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": ""
+    },
+    {
+        "id": "18a4256.3266edb",
+        "type": "ui_group",
+        "z": "",
+        "name": "Main",
+        "tab": "fe81b0bf.13297",
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "fe81b0bf.13297",
+        "type": "ui_tab",
+        "z": "",
+        "name": "Home",
+        "icon": "dashboard"
+    }
+]
